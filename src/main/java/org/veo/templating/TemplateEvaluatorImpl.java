@@ -31,6 +31,8 @@ import java.util.ResourceBundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.veo.fileconverter.charts.ChartDirective;
+import org.veo.fileconverter.charts.DataDirective;
 import org.veo.reporting.ReportCreationParameters;
 import org.veo.templating.methods.Base64Encode;
 
@@ -72,6 +74,8 @@ public class TemplateEvaluatorImpl implements TemplateEvaluator {
       cfg.setCacheStorage(NullCacheStorage.INSTANCE);
     }
     cfg.setSharedVariable("base64", Base64Encode.INSTANCE);
+    cfg.setSharedVariable("chart", new ChartDirective());
+    cfg.setSharedVariable("data", new DataDirective());
 
     TemplateConfiguration tcMD = new TemplateConfiguration();
     tcMD.setOutputFormat(MarkdownOutputFormat.INSTANCE);
