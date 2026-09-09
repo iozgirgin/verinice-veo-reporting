@@ -242,7 +242,7 @@ ${bundle.incident_security_notificationType}
 <#list criticalInfrastructureLinks as criticalInfrastructureLink>
 <#assign criticalInfrastructure=criticalInfrastructureLink.target />
 #### ${criticalInfrastructure.name}
-<@def bundle.incident_criticalInfrastructure_description concernedTargetLink.incident_criticalInfrastructure_description />
+<@def bundle.incident_criticalInfrastructure_description criticalInfrastructureLink.incident_criticalInfrastructure_description />
 
 </#list>
 </#if>
@@ -299,7 +299,7 @@ ${bundle.incident_security_notificationType}
 
 <@def bundle.incident_nis2notification_recipientsInformed incident.incident_nis2notification_recipientsInformed />
 
-<@def bundle.incident_nis2notification_dateOfRecipientsInformed, (incident.incident_nis2notification_dateOfRecipientsInformed?datetime.iso)! />
+<@def bundle.incident_nis2notification_dateOfRecipientsInformed, (incident.incident_nis2notification_dateOfRecipientsInformed?date.iso)! />
 
 <@def bundle.incident_nis2notification_formOfNis2Notification incident.incident_nis2notification_formOfNis2Notification />
 
@@ -309,7 +309,7 @@ ${bundle.incident_security_notificationType}
 
 <@def bundle.incident_nis2notification_publicInformation incident.incident_nis2notification_publicInformation />
 
-<@def bundle.incident_nis2notification_dateOfPublicInformation, (incident.incident_nis2notification_dateOfPublicInformation?datetime.iso)! />
+<@def bundle.incident_nis2notification_dateOfPublicInformation, (incident.incident_nis2notification_dateOfPublicInformation?date.iso)! />
 
 </div>
 
