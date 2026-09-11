@@ -7,7 +7,7 @@
          groupBySubType = com.groupBySubType
          sortModules = icom.sortModules
          heading = com.heading
-         title = icom.title
+         title = com.title
          controlTitle = icom.controlTitle,
          riStatusColors = icom.riStatusColors
          filterComplianceCIs = com.filterComplianceCIs />

@@ -6,7 +6,7 @@
          multiline = com.multiline
          groupBySubType = com.groupBySubType
          sortModules = icom.sortModules
-         title = icom.title
+         title = com.title
          filterComplianceCIs = com.filterComplianceCIs />
 
 

@@ -1,5 +1,4 @@
 <#import "/libs/commons.md" as com>
-<#import "/libs/itbp-commons.md" as icom>
 
 <#assign table = com.table
         row = com.row
@@ -7,7 +6,7 @@
          status = com.status
          multiline = com.multiline
          groupBySubType = com.groupBySubType
-         title = icom.title />
+         title = com.title />
 
 
 <style>

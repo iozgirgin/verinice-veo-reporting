@@ -1,11 +1,10 @@
 <#import "/libs/commons.md" as com>
-<#import "/libs/itbp-commons.md" as icom>
 <#import "/libs/iso-risk.md" as isoRisk>
 
 <#assign table = com.table
          def = com.def
          groupBySubType = com.groupBySubType
-         title = icom.title />
+         title = com.title />
 
 <style>
 <@com.defaultStyles true/>
@@ -122,14 +121,6 @@ dl, .risk {
 + groupBySubType(scope.members, 'asset', domain) />
 
 <#assign riskDefinitionId=scope.domains[domain.id].riskDefinition! />
-
-<#function title element>
-<#if element.abbreviation?has_content>
-  <#return "${element.abbreviation} ${element.name}">
-  <#else>
-  <#return element.name>
-</#if>
-</#function>
 
 <bookmarks>
   <bookmark name="${bundle.main_page}" href="#main_page"/>

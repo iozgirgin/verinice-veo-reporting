@@ -20,14 +20,6 @@
   <#return step2?filter(it->it.abbreviation?has_content)+step2?filter(it->!it.abbreviation?has_content)>
 </#function>
 
-<#function title element>
-<#if element.abbreviation?has_content>
-  <#return "${element.abbreviation} ${element.name}">
-  <#else>
-  <#return element.name>
-</#if>
-</#function>
-
 <#function controlTitle element>
 <#local result = element.name>
 <#if element.control_bpInformation_protectionApproach?has_content>

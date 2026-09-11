@@ -8,7 +8,7 @@
 
 <#assign scenario = risk.scenario>
 
-<#list 0..<headinglevel as i>#</#list> ${icom.title(scenario)}
+<#list 0..<headinglevel as i>#</#list> ${com.title(scenario)}
 
 <@com.def bundle.risk_owner, (risk.riskOwner.name)! />
 

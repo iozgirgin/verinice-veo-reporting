@@ -125,3 +125,11 @@ ${term}
     </#list>
     <#return result>
 </#function>
+
+<#function title element>
+    <#if element.abbreviation?has_content>
+        <#return "${element.abbreviation} ${element.name}">
+    <#else>
+        <#return element.name>
+    </#if>
+</#function>
