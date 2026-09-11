@@ -106,6 +106,7 @@ dt {
 <#if riskDefinitionId?has_content>
   <bookmark name="${bundle.risk_matrix}" href="#risk_matrix"/>
 </#if>
+<bookmark name="${scope.name}" href="#scope"/>
 <#list processesInScope as process>
   <bookmark name="${process.name}" href="#process_${process?counter}">
   </bookmark>
@@ -186,9 +187,9 @@ dt {
 
 <#assign riskDefinition=domain.riskDefinitions[riskDefinitionId] />
 
-<#assign processRisksInDomainWithData = [] />
+<#assign risksInDomainWithData = (scope.risks![])?filter(it-> it.domains?keys?seq_contains(domain.id) && it.domains[domain.id].riskDefinitions?has_content) />
 <#list processesInScope as process>
-  <#assign processRisksInDomainWithData = processRisksInDomainWithData + process.risks?filter(it-> it.domains?keys?seq_contains(domain.id) && it.domains[domain.id].riskDefinitions?has_content) />
+  <#assign risksInDomainWithData = risksInDomainWithData + process.risks?filter(it-> it.domains?keys?seq_contains(domain.id) && it.domains[domain.id].riskDefinitions?has_content) />
 </#list>
 
 <#macro cellStyle color>
@@ -263,7 +264,7 @@ ${potentialImpact.translations[.lang].name}
 <td class="risk_charts_col">
 <object type="jfreechart/veo-pie" style="margin-bottom: 2cm;width:10cm;height:8cm;margin:auto;" title="${bundle.risk_distribution} (${bundle.gross})" alt="${bundle.chart}: ${bundle.risk_distribution} (${bundle.gross})">
 <#list riskDefinition.riskValues as riskValue>
-  <#assign filteredRisks=processRisksInDomainWithData?filter(r->
+  <#assign filteredRisks=risksInDomainWithData?filter(r->
   (r.domains[domain.id].riskDefinitions[riskDefinitionId].riskValues?map(it->it.inherentRisk!-1)?max!-1) == riskValue.ordinalValue)>
   <#if filteredRisks?has_content>
     <data name="${riskValue.translations[.lang].name}" color="${riskValue.htmlColor}" value="${filteredRisks?size}"/>
@@ -275,7 +276,7 @@ ${potentialImpact.translations[.lang].name}
 <td class="risk_charts_col">
 <object type="jfreechart/veo-pie" style="margin-bottom: 2cm;width:10cm;height:8cm;margin:auto;" title="${bundle.risk_distribution} (${bundle.net})" alt="${bundle.chart}: ${bundle.risk_distribution} (${bundle.net})">
 <#list riskDefinition.riskValues as riskValue>
-  <#assign filteredRisks=processRisksInDomainWithData?filter(r->
+  <#assign filteredRisks=risksInDomainWithData?filter(r->
   (r.domains[domain.id].riskDefinitions[riskDefinitionId].riskValues?map(it->it.residualRisk!-1)?max!-1) == riskValue.ordinalValue)>
   <#if filteredRisks?has_content>
     <data name="${riskValue.translations[.lang].name}" color="${riskValue.htmlColor}" value="${filteredRisks?size}"/>
@@ -289,22 +290,29 @@ ${potentialImpact.translations[.lang].name}
 
 <div class="pagebreak"></div>
 
-<#list processesInScope as process>
+<#macro targetObjectDisplay targetObject anchor>
+# ${title(targetObject)} {#${anchor}}
 
-# ${title(process)} {#process_${process?counter}}
+<@def bundle.description targetObject.description true/>
 
-<@def bundle.description process.description true/>
+<#assign risksInDomain = targetObject.risks?filter(it-> it.domains?keys?seq_contains(domain.id)) />
 
-<#assign processRisksInDomain = process.risks?filter(it-> it.domains?keys?seq_contains(domain.id)) />
-
-<#if processRisksInDomain?has_content>
+<#if risksInDomain?has_content>
 ## ${bundle.risks}
 
-<#list processRisksInDomain as risk>
-<@dpRisk.riskdisplay 3 process risk domain riskDefinition />
+<#list risksInDomain as risk>
+<@dpRisk.riskdisplay 3 targetObject risk domain riskDefinition />
 </#list>
 
 </#if>
+
+</#macro>
+
+<@targetObjectDisplay scope "scope"/>
+<div class="pagebreak"></div>
+<#list processesInScope as process>
+
+<@targetObjectDisplay process "process_${process?counter}"/>
 
 <#if process?has_next>
 
