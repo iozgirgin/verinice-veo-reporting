@@ -27,7 +27,7 @@
 
 <#assign scenario = risk.scenario>
 
-<#list 0..<headinglevel as i>#</#list> ${(scenario.name)!} (${risk.designator})
+<#list 0..<headinglevel as i>#</#list> ${com.title(scenario)}
 
 <@com.def messages.risk_owner, (risk.riskOwner.name)! />
 

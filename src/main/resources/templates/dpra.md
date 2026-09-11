@@ -2,7 +2,8 @@
 <#import "/libs/dp-risk.md" as dpRisk>
 
 <#assign table = com.table
-         def = com.def />
+         def = com.def
+         title = com.title />
 
 <#assign scope=target>
 <#assign processesInScope = scope.getMembersWithType('process')?filter(p ->p.hasSubType('PRO_DataProcessing'))>
@@ -290,7 +291,7 @@ ${potentialImpact.translations[.lang].name}
 
 <#list processesInScope as process>
 
-# ${process.name} (${process.designator}) {#process_${process?counter}}
+# ${title(process)} {#process_${process?counter}}
 
 <@def bundle.description process.description true/>
 
