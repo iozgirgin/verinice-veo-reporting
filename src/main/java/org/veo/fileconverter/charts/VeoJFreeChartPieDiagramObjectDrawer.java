@@ -17,55 +17,25 @@
  */
 package org.veo.fileconverter.charts;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.ChartEntity;
-import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
-import org.jfree.chart.plot.PieLabelLinkStyle;
-import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.helger.collection.commons.ICommonsOrderedSet;
-import com.helger.font.api.FontResourceManager;
-import com.helger.font.api.IFontResource;
 import com.openhtmltopdf.extend.FSObjectDrawer;
 import com.openhtmltopdf.extend.OutputDevice;
 import com.openhtmltopdf.render.RenderingContext;
 
-import org.veo.reporting.exception.VeoReportingException;
-
 public class VeoJFreeChartPieDiagramObjectDrawer implements FSObjectDrawer {
-
-  private static final Pattern PATTERN_RGB =
-      Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
-
-  private static final Pattern PATTERN_HTML =
-      Pattern.compile("#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})", Pattern.CASE_INSENSITIVE);
-
-  private static final Font OPEN_SANS_REGULAR;
-  private static final Font OPEN_SANS_BOLD;
-
-  static {
-    var openSansFontResources = FontResourceManager.getAllResourcesOfFontType("Open Sans");
-    OPEN_SANS_REGULAR = loadFont(openSansFontResources, 400);
-    OPEN_SANS_BOLD = loadFont(openSansFontResources, 700);
-  }
 
   @SuppressWarnings("PMD.ReturnEmptyCollectionRatherThanNull")
   private static Map<Shape, String> buildShapeLinkMap(
@@ -88,37 +58,6 @@ public class VeoJFreeChartPieDiagramObjectDrawer implements FSObjectDrawer {
       }
     }
     return linkShapes;
-  }
-
-  private static Font loadFont(
-      ICommonsOrderedSet<IFontResource> openSansFontResources, int weight) {
-    IFontResource resource =
-        openSansFontResources.findFirst(
-            f -> f.getFontWeight().getWeight() == weight && f.getFontStyle().isRegular());
-    try (InputStream is =
-        Objects.requireNonNull(resource, "Failed to resolve font").getBufferedInputStream()) {
-      return Font.createFont(Font.TRUETYPE_FONT, is);
-    } catch (Exception e1) {
-      throw new VeoReportingException("Error initializing chart font", e1);
-    }
-  }
-
-  public static Color parseColor(String input) {
-    Matcher m = PATTERN_RGB.matcher(input);
-    if (m.matches()) {
-      return new Color(
-          Integer.parseInt(m.group(1)), // r
-          Integer.parseInt(m.group(2)), // g
-          Integer.parseInt(m.group(3))); // b
-    }
-    m = PATTERN_HTML.matcher(input);
-    if (m.matches()) {
-      return new Color(
-          Integer.parseInt(m.group(1), 16), // r
-          Integer.parseInt(m.group(2), 16), // g
-          Integer.parseInt(m.group(3), 16)); // b
-    }
-    return null;
   }
 
   @Override
@@ -159,29 +98,7 @@ public class VeoJFreeChartPieDiagramObjectDrawer implements FSObjectDrawer {
     }
 
     final JFreeChart chart1 =
-        ChartFactory.createPieChart(e.getAttribute("title"), dataset, true, false, true);
-    PiePlot<String> plot = (PiePlot<String>) chart1.getPlot();
-    plot.setBackgroundPaint(null);
-    plot.setURLGenerator((dataset1, key, pieIndex) -> urls.get(key.toString()));
-    plot.setShadowPaint(null);
-    plot.setShadowGenerator(null);
-    plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}\n{1} ({2})"));
-    plot.setLegendLabelGenerator(new StandardPieSectionLabelGenerator("{0}: {2}"));
-
-    plot.setLabelOutlinePaint(null);
-    plot.setLabelBackgroundPaint(new Color(255, 255, 255, 130));
-    plot.setLabelLinkStyle(PieLabelLinkStyle.QUAD_CURVE);
-    plot.setLabelShadowPaint(null);
-    colors.forEach((key, value) -> plot.setSectionPaint(key, parseColor(value)));
-    Color defaultFontColor = Color.decode("#767676");
-    plot.setOutlinePaint(defaultFontColor);
-    plot.setLabelPaint(defaultFontColor);
-    chart1.getLegend().setItemPaint(defaultFontColor);
-
-    chart1.getTitle().setPaint(defaultFontColor);
-    chart1.getTitle().setFont(OPEN_SANS_BOLD.deriveFont(Font.BOLD, 20f));
-    chart1.getLegend().setItemFont(OPEN_SANS_REGULAR.deriveFont(Font.PLAIN, 12f));
-    plot.setLabelFont(OPEN_SANS_REGULAR.deriveFont(Font.PLAIN, 12f));
+        ChartUtils.createPieChart(e.getAttribute("title"), dataset, urls, colors);
 
     final ChartRenderingInfo renderingInfo = new ChartRenderingInfo();
     outputDevice.drawWithGraphics(

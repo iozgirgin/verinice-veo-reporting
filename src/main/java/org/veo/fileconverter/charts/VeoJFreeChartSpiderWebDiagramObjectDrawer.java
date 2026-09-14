@@ -26,8 +26,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
@@ -47,12 +45,6 @@ import com.openhtmltopdf.render.RenderingContext;
 import org.veo.reporting.exception.VeoReportingException;
 
 public class VeoJFreeChartSpiderWebDiagramObjectDrawer implements FSObjectDrawer {
-
-  private static final Pattern PATTERN_RGB =
-      Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
-
-  private static final Pattern PATTERN_HTML =
-      Pattern.compile("#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})", Pattern.CASE_INSENSITIVE);
 
   private static final Font OPEN_SANS_REGULAR;
   private static final Font OPEN_SANS_BOLD;
@@ -97,24 +89,6 @@ public class VeoJFreeChartSpiderWebDiagramObjectDrawer implements FSObjectDrawer
     } catch (Exception e1) {
       throw new VeoReportingException("Error initializing chart font", e1);
     }
-  }
-
-  public static Color parseColor(String input) {
-    Matcher m = PATTERN_RGB.matcher(input);
-    if (m.matches()) {
-      return new Color(
-          Integer.parseInt(m.group(1)), // r
-          Integer.parseInt(m.group(2)), // g
-          Integer.parseInt(m.group(3))); // b
-    }
-    m = PATTERN_HTML.matcher(input);
-    if (m.matches()) {
-      return new Color(
-          Integer.parseInt(m.group(1), 16), // r
-          Integer.parseInt(m.group(2), 16), // g
-          Integer.parseInt(m.group(3), 16)); // b
-    }
-    return null;
   }
 
   @Override
