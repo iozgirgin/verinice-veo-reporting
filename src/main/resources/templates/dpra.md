@@ -262,27 +262,27 @@ ${potentialImpact.translations[.lang].name}
 <tr>
 
 <td class="risk_charts_col">
-<object type="jfreechart/veo-pie" style="margin-bottom: 2cm;width:10cm;height:8cm;margin:auto;" title="${bundle.risk_distribution} (${bundle.gross})" alt="${bundle.chart}: ${bundle.risk_distribution} (${bundle.gross})">
+<@chart type="pie" style="margin-bottom: 2cm;margin:auto;" width=10 height=8 title="${bundle.risk_distribution} (${bundle.gross})" alt="${bundle.chart}: ${bundle.risk_distribution} (${bundle.gross})">
 <#list riskDefinition.riskValues as riskValue>
   <#assign filteredRisks=risksInDomainWithData?filter(r->
   (r.domains[domain.id].riskDefinitions[riskDefinitionId].riskValues?map(it->it.inherentRisk!-1)?max!-1) == riskValue.ordinalValue)>
   <#if filteredRisks?has_content>
-    <data name="${riskValue.translations[.lang].name}" color="${riskValue.htmlColor}" value="${filteredRisks?size}"/>
+    <@data label="${riskValue.translations[.lang].name}" color="${riskValue.htmlColor}" value="${filteredRisks?size}"/>
   </#if>
 </#list>
-</object>
+</@chart>
 </td>
 
 <td class="risk_charts_col">
-<object type="jfreechart/veo-pie" style="margin-bottom: 2cm;width:10cm;height:8cm;margin:auto;" title="${bundle.risk_distribution} (${bundle.net})" alt="${bundle.chart}: ${bundle.risk_distribution} (${bundle.net})">
+<@chart type="pie" style="margin-bottom: 2cm;margin:auto;" width=10 height=8 title="${bundle.risk_distribution} (${bundle.net})" alt="${bundle.chart}: ${bundle.risk_distribution} (${bundle.net})">
 <#list riskDefinition.riskValues as riskValue>
   <#assign filteredRisks=risksInDomainWithData?filter(r->
   (r.domains[domain.id].riskDefinitions[riskDefinitionId].riskValues?map(it->it.residualRisk!-1)?max!-1) == riskValue.ordinalValue)>
   <#if filteredRisks?has_content>
-    <data name="${riskValue.translations[.lang].name}" color="${riskValue.htmlColor}" value="${filteredRisks?size}"/>
+    <@data label="${riskValue.translations[.lang].name}" color="${riskValue.htmlColor}" value="${filteredRisks?size}"/>
   </#if>
 </#list>
-</object>
+</@chart>
 </td>
 </tbody>
 </table>
