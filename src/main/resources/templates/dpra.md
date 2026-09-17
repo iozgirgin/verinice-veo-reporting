@@ -8,6 +8,18 @@
 <#assign scope=target>
 <#assign processesInScope = scope.getMembersWithType('process')?filter(p ->p.hasSubType('PRO_DataProcessing'))>
 
+<#assign processorsWithRisks = [] />
+<#list processesInScope as processing>
+  <#list processing.findLinked('process_dataTransmission') as transmission>
+    <#list transmission.findLinked('process_processor') as processor>
+      <#if !processorsWithRisks?seq_contains(processor) && processor.risks?has_content>
+        <#assign processorsWithRisks = processorsWithRisks + [processor] />
+      </#if>
+    </#list>
+  </#list>
+</#list>
+
+
 <style>
 <@com.defaultStyles true/>
 h1, h2, h3, h4 {
@@ -107,6 +119,10 @@ dt {
   <bookmark name="${bundle.risk_matrix}" href="#risk_matrix"/>
 </#if>
 <bookmark name="${scope.name}" href="#scope"/>
+<#list processorsWithRisks as processor>
+  <bookmark name="${processor.name}" href="#processor_${processor?counter}">
+  </bookmark>
+</#list>
 <#list processesInScope as process>
   <bookmark name="${process.name}" href="#process_${process?counter}">
   </bookmark>
@@ -132,7 +148,6 @@ dt {
 <h1>${bundle.title}</h1>
 <p>powered by verinice</p>
 </div>
-
 
 
 # ${bundle.main_page} {#main_page}
@@ -188,6 +203,9 @@ dt {
 <#assign riskDefinition=domain.riskDefinitions[riskDefinitionId] />
 
 <#assign risksInDomainWithData = (scope.risks![])?filter(it-> it.domains?keys?seq_contains(domain.id) && it.domains[domain.id].riskDefinitions?has_content) />
+<#list processorsWithRisks as processor>
+  <#assign risksInDomainWithData = risksInDomainWithData + processor.risks?filter(it-> it.domains?keys?seq_contains(domain.id) && it.domains[domain.id].riskDefinitions?has_content) />
+</#list>
 <#list processesInScope as process>
   <#assign risksInDomainWithData = risksInDomainWithData + process.risks?filter(it-> it.domains?keys?seq_contains(domain.id) && it.domains[domain.id].riskDefinitions?has_content) />
 </#list>
@@ -310,13 +328,17 @@ ${potentialImpact.translations[.lang].name}
 
 <@targetObjectDisplay scope "scope"/>
 <div class="pagebreak"></div>
+
+<#list processorsWithRisks as processor>
+  <div class="pagebreak"></div>
+
+  <@targetObjectDisplay processor "processor_${processor?counter}"/>
+
+</#list>
+
 <#list processesInScope as process>
+<div class="pagebreak"></div>
 
 <@targetObjectDisplay process "process_${process?counter}"/>
 
-<#if process?has_next>
-
-<div class="pagebreak"></div>
-
-</#if>
 </#list>
