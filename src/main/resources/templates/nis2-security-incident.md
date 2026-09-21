@@ -326,9 +326,9 @@ ${bundle.incident_security_notificationType}
 </#list>
 </#if>
 
-<#assign measuresPlannedLinks=incident.getLinks('incident_securityMeasurePlaned')!> <#--  sic -->
+<#assign measuresPlannedLinks=incident.getLinks('incident_SecurityMeasurePlaned')!> <#--  sic -->
 <#if measuresPlannedLinks?has_content>
-### ${bundle.incident_measuresPlaned} <#--  sic -->
+### ${bundle.incident_SecurityMeasurePlaned} <#--  sic -->
 <#list measuresPlannedLinks as measuresPlannedLink>
 <#assign measuresPlanned=measuresPlannedLink.target />
 - ${measuresPlanned.name}
