@@ -1,12 +1,14 @@
 {
   "name": {
-    "en": "TEST DataGood Risk Assessment"
+    "en": "TEST DataGood Risk Assessment",
+    "tr": "TEST DataGood Risk Değerlendirmesi"
   },
   "domainName": "TEST DataGood ISO",
   "description": {
-    "en": "Synthetic DataGood validation report. Contains no licensed standard catalogue."
+    "en": "Synthetic DataGood validation report. Contains no licensed standard catalogue.",
+    "tr": "Sentetik DataGood doğrulama raporu. Lisanslı standart katalog metni içermez."
   },
-  "templateFile": "iso-risk-analysis.md",
+  "templateFile": "datagood-iso-risk.md",
   "templateType": "text/markdown",
   "outputTypes": [
     "application/pdf"

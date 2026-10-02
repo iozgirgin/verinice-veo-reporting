@@ -1,10 +1,12 @@
 {
   "name": {
-    "en": "TEST DataGood Statement of Applicability"
+    "en": "TEST DataGood Statement of Applicability",
+    "tr": "TEST DataGood Uygulanabilirlik Bildirimi"
   },
   "domainName": "TEST DataGood ISO",
   "description": {
-    "en": "Synthetic DataGood validation report. Contains no licensed standard catalogue."
+    "en": "Synthetic DataGood validation report. Contains no licensed standard catalogue.",
+    "tr": "Sentetik DataGood doğrulama raporu. Lisanslı standart katalog metni içermez."
   },
   "templateFile": "datagood-iso-soa.md",
   "templateType": "text/markdown",

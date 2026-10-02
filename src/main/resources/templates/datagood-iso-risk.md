@@ -1,0 +1,408 @@
+<#-- DataGood ISO adaptation of SerNet iso-risk-analysis.md; AGPL-3.0-or-later. -->
+<#import "/libs/commons.md" as com>
+<#import "/libs/iso-risk.md" as isoRisk>
+
+<#assign table = com.table
+         def = com.def
+         groupBySubType = com.groupBySubType
+         title = com.title />
+
+<style>
+<@com.defaultStyles true/>
+<#if .lang == 'tr'>
+@page { @bottom-right { content: 'Sayfa ' counter(page) ' / ' counter(pages); } }
+</#if>
+
+h1, h2, h3, h4 {
+  page-break-after: avoid;
+}
+
+.main_page {
+  page-break-after: always;
+}
+
+.main_page table th:first-child, .main_page table td:first-child {
+  width: 8cm;
+}
+dt {
+  font-weight: 600;
+}
+
+.risk_charts_container {
+  width:100%;
+}
+
+.risk_charts_col {
+  text-align: center;
+}
+
+.risk_charts_col h2 {
+  margin-bottom: 1cm;
+}
+
+dl, .risk {
+  page-break-inside: avoid;
+}
+
+.riskmatrix {
+  margin: auto;
+  table-layout: fixed;
+}
+
+.nobreak {
+  page-break-inside: avoid;
+}
+
+.riskmatrix td, .riskmatrix th {
+  border: 0.5mm solid #e3e3e3;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.riskmatrix .caption {
+  font-weight: bold;
+}
+
+<#assign cellSize="1.8cm"?no_esc />
+<#assign labelSize="4cm"?no_esc />
+<#assign captionSize="0.9cm"?no_esc />
+
+.riskmatrix .cell,
+.riskmatrix tbody .label {
+  height: ${cellSize};
+}
+
+.riskmatrix col {
+  width: ${cellSize};
+}
+
+.riskmatrix col:nth-child(1) {
+  width: ${captionSize};
+}
+
+.riskmatrix col:nth-child(2) {
+  width: ${labelSize};
+}
+
+.riskmatrix th.caption {
+  height: ${captionSize};
+}
+
+.riskmatrix th.label {
+  font-weight: normal;
+  height: ${labelSize};
+}
+
+.riskmatrix .spacer {
+  border-color: transparent;
+}
+
+.riskmatrix .rotate div {
+  transform: rotate(-90deg);
+}
+
+.riskmatrix td.rotate div {
+  width: 0;
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg) translateY(2mm);
+}
+</style>
+
+<#assign scope = target/>
+
+<#function risksInDomain riskAffected>
+  <#return (riskAffected.risks?filter(it-> it.domains?keys?seq_contains(domain.id))?map(it->{"key": it.scenario.abbreviation_naturalized, "value": it})?sort_by('key')?map(it->it.value))!>
+</#function>
+
+<#assign risksByTargetObjectId = {}>
+<#list ([scope] + scope.members) as targetObject>
+  <#assign risksByTargetObjectId = risksByTargetObjectId + {targetObject.id : risksInDomain(targetObject) } />
+</#list>
+
+<#assign organizations=scope.scopes?filter(it->it.hasSubType('SCP_Organization')) />
+
+<#assign elementSubTypeGroups = groupBySubType(scope.members, 'scope', domain)
++ groupBySubType(scope.members, 'process', domain)
++ groupBySubType(scope.members, 'asset', domain) />
+
+<#assign riskDefinitionId=scope.domains[domain.id].riskDefinition! />
+
+<bookmarks>
+  <bookmark name="${bundle.main_page}" href="#main_page"/>
+<#if riskDefinitionId?has_content>
+  <bookmark name="${bundle.risk_definition}" href="#risk_definition"/>
+</#if>
+<#if risksByTargetObjectId[scope.id]?has_content>
+  <bookmark name="${bundle.scope_SCP_isoScope_singular}" href="#iso_scope"/>
+</#if>
+  <#list elementSubTypeGroups as group>
+    <#if group.elements?filter(it->risksByTargetObjectId[it.id]?has_content)?has_content>
+      <bookmark name="${group.subTypePlural}" href="#${group.elementType}_${group.subType}">
+        <#list group.elements as element>
+          <#if risksByTargetObjectId[element.id]?has_content>
+            <bookmark name="${title(element)}" href="#${group.elementType}_${group.subType}_${element?counter}"/>
+          </#if>
+        </#list>
+      </bookmark>
+    </#if>
+  </#list>
+</bookmarks>
+
+
+<div class="footer-left">
+  <table>
+    <tr>
+      <td><#if .lang == 'tr'>Kurum<#else>Organisation</#if>: </td>
+      <td>${scope.name}</td>
+    </tr>
+    <tr>
+      <td>${bundle.creation_date}: </td>
+      <td>${.now?date}</td>
+    </tr>
+  </table>
+</div>
+
+
+<div class="cover">
+<h1>${bundle.title}</h1>
+<p>powered by verinice</p>
+</div>
+
+
+
+# ${bundle.main_page} {#main_page}
+
+<div class="main_page">
+
+<#if organizations?has_content>
+
+<#list organizations as organization>
+    <@table bundle.scope_SCP_Organization_singular,
+    organization,
+    ['name',
+    'scope_address_address1',
+    {'scope_address_postcode, scope_address_city' : 'scope_address_postcode scope_address_city'},
+    'scope_contactInformation_phone',
+    'scope_contactInformation_email',
+    'scope_contactInformation_website'
+    ]/>
+
+</#list>
+<#else>
+${bundle.no_organizations}
+</#if>
+
+<@table bundle.scope_SCP_isoScope_singular,
+scope,
+['name',
+'description',
+'status'
+],
+domain/>
+
+</div>
+<#if riskDefinitionId?has_content>
+
+# ${bundle.risk_definition} {#risk_definition}
+
+<#assign riskDefinition=domain.riskDefinitions[riskDefinitionId] />
+
+<#assign risksInDomainWithData = scope.risks?filter(it-> it.domains?keys?seq_contains(domain.id) && it.domains[domain.id].riskDefinitions?has_content) />
+<#list elementSubTypeGroups as group>
+  <#list group.elements as element>
+    <#assign risksInDomainWithData = risksInDomainWithData + element.risks?filter(it-> it.domains?keys?seq_contains(domain.id) && it.domains[domain.id].riskDefinitions?has_content) />
+  </#list>
+</#list>
+
+<#macro cellStyle color>
+    style="background-image: linear-gradient(45deg, ${color} 0%, ${color} 4mm, white 4mm, white);"
+</#macro>
+
+<#macro matrixCell color text>
+  <td <@cellStyle color />>${text}</td>
+</#macro>
+
+<#assign riskCategoriesWithMatrix=riskDefinition.categories?filter(it->it.valueMatrix?has_content)>
+
+<#list riskCategoriesWithMatrix as category>
+<#assign multipleMatrixes = (riskCategoriesWithMatrix?size > 1)>
+
+<#if multipleMatrixes>
+## ${category.translations[.lang].name}
+</#if>
+
+<table class="riskmatrix nobreak">
+<colgroup>
+<col span="1">
+<col span="1">
+<#list riskDefinition.probability.levels as probability>
+<col span="1">
+</#list>
+</colgroup>
+<thead>
+<tr>
+<th class="spacer"/>
+<th class="spacer"/>
+<th colspan="${riskDefinition.probability.levels?size}" class="caption">
+${bundle.probability}
+</th>
+</tr>
+<tr>
+<th class="spacer"/>
+<th class="spacer"/>
+<#list riskDefinition.probability.levels as probability>
+<th class="rotate label" <@cellStyle probability.htmlColor />>
+<div>${probability.translations[.lang].name}</div>
+</th>
+</#list>
+</tr>
+</thead>
+<tbody>
+<#list category.potentialImpacts?reverse as potentialImpact>
+<tr class="impactrow${potentialImpact?index}">
+<#if potentialImpact?index == 0>
+<td class="rotate caption" rowspan="${category.potentialImpacts?size}">
+<div>${bundle.impact}</div>
+</td>
+</#if>
+<td class="label" <@cellStyle potentialImpact.htmlColor />>
+${potentialImpact.translations[.lang].name}
+</td>
+<#list riskDefinition.probability.levels as probability>
+<#assign risk=category.valueMatrix[potentialImpact.ordinalValue][probability.ordinalValue] />
+<#assign riskDef=riskDefinition.riskValues[risk.ordinalValue] />
+<@matrixCell riskDef.htmlColor riskDef.translations[.lang].name />
+</#list>
+</tr>
+</#list>
+</tbody>
+
+</table>
+
+<div class="pagebreak"></div>
+
+<#if multipleMatrixes>
+### ${bundle.impacts}
+<#else>
+## ${bundle.impacts}
+</#if>
+
+<#list category.potentialImpacts as impact>
+
+<@def impact.translations[.lang].name impact.translations[.lang].description/>
+
+</#list>
+
+</#list>
+
+<#if multipleMatrixes>
+<div class="pagebreak"></div>
+</#if>
+
+<div class="nobreak">
+
+## ${bundle.probabilities}
+
+<#list riskDefinition.probability.levels as probability>
+
+<@def probability.translations[.lang].name probability.translations[.lang].description/>
+
+</#list>
+</div>
+
+<div class="nobreak">
+
+## ${bundle.risk_caterogies}
+
+<#list riskDefinition.riskValues as risk>
+
+<span style="padding-left: 2mm; border-left: 5mm solid ${risk.htmlColor};">${risk.translations[.lang].name}</span>
+
+: ${risk.translations[.lang].description}
+
+</#list>
+</div>
+
+
+# ${bundle.chart_section_title} {#charts}
+
+<table class="risk_charts_container">
+<tbody>
+<tr>
+
+<td class="risk_charts_col">
+<@chart type="pie" style="margin-bottom: 2cm;margin:auto;" width=10 height=8 title="${bundle.risk_distribution} (${bundle.gross})" alt="${bundle.chart}: ${bundle.risk_distribution} (${bundle.gross})">
+<#list riskDefinition.riskValues as riskValue>
+  <#assign filteredRisks=risksInDomainWithData?filter(r->
+  (r.domains[domain.id].riskDefinitions[riskDefinitionId].riskValues?map(it->it.inherentRisk!-1)?max!-1) == riskValue.ordinalValue)>
+  <#if filteredRisks?has_content>
+    <@data label="${riskValue.translations[.lang].name}" color="${riskValue.htmlColor}" value="${filteredRisks?size}"/>
+  </#if>
+</#list>
+</@chart>
+</td>
+
+<td class="risk_charts_col">
+<@chart type="pie" style="margin-bottom: 2cm;margin:auto;" width=10 height=8 title="${bundle.risk_distribution} (${bundle.net})" alt="${bundle.chart}: ${bundle.risk_distribution} (${bundle.net})">
+<#list riskDefinition.riskValues as riskValue>
+  <#assign filteredRisks=risksInDomainWithData?filter(r->
+  (r.domains[domain.id].riskDefinitions[riskDefinitionId].riskValues?map(it->it.residualRisk!-1)?max!-1) == riskValue.ordinalValue)>
+  <#if filteredRisks?has_content>
+    <@data label="${riskValue.translations[.lang].name}" color="${riskValue.htmlColor}" value="${filteredRisks?size}"/>
+  </#if>
+</#list>
+</@chart>
+</td>
+</tbody>
+</table>
+</#if>
+
+<div class="pagebreak"></div>
+
+<#macro moduleview targetObject>
+<@def bundle.description, targetObject.description true/>
+
+<#assign targetObjectRisksInDomain = risksByTargetObjectId[targetObject.id] />
+
+<#if targetObjectRisksInDomain?has_content>
+## ${bundle.risks}
+
+<#list targetObjectRisksInDomain as risk>
+<@isoRisk.riskdisplay 3 targetObject risk domain riskDefinition />
+</#list>
+
+</#if>
+</#macro>
+
+<#if risksByTargetObjectId[scope.id]?has_content>
+
+# ${title(scope)} {#iso_scope}
+
+<@moduleview scope/>
+<div class="pagebreak"></div>
+
+</#if>
+
+<#list elementSubTypeGroups as group>
+
+<#if group.elements?filter(it->risksByTargetObjectId[it.id]?has_content)?has_content>
+
+# ${group.subTypePlural} {#${group.elementType}_${group.subType}}
+
+<#list group.elements as element>
+
+<#if risksByTargetObjectId[element.id]?has_content>
+
+## ${title(element)} {#${group.elementType}_${group.subType}_${element?counter}}
+
+<@moduleview element/>
+
+<div class="pagebreak"></div>
+
+</#if>
+
+</#list>
+
+</#if>
+
+</#list>

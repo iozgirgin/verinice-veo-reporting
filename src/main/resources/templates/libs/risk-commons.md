@@ -1,6 +1,13 @@
 <#import "/libs/commons.md" as com>
 
 <#function riskReductionLabel raw>
+  <#if .lang == 'tr'>
+    <#return {"RISK_TREATMENT_ACCEPTANCE": "Risk kabulü",
+      "RISK_TREATMENT_AVOIDANCE": "Riskten kaçınma",
+      "RISK_TREATMENT_NONE": "Yok",
+      "RISK_TREATMENT_REDUCTION": "Risk azaltma",
+      "RISK_TREATMENT_TRANSFER": "Risk aktarımı"}[raw] />
+  </#if>
   <#if .lang == 'en'>
     <#return {"RISK_TREATMENT_ACCEPTANCE": "Risk acceptance",
       "RISK_TREATMENT_AVOIDANCE": "Risk avoidance",

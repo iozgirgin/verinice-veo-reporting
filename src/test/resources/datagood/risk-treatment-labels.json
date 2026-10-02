@@ -1,5 +1,5 @@
 {
-  "fixtureVersion": "1.2.0",
+  "fixtureVersion": "1.3.0",
   "treatments": [
     "RISK_TREATMENT_ACCEPTANCE",
     "RISK_TREATMENT_AVOIDANCE",
@@ -21,6 +21,13 @@
       "Keins",
       "Risikoreduktion",
       "Risikotransfer"
+    ],
+    "tr": [
+      "Risk kabulü",
+      "Riskten kaçınma",
+      "Yok",
+      "Risk azaltma",
+      "Risk aktarımı"
     ]
   }
 }

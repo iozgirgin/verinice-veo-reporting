@@ -28,6 +28,6 @@ class DataGoodRiskTreatmentLabelSpec extends Specification {
         org.jsoup.Jsoup.parse(output.toString('UTF-8')).text().trim().split('\\|').toList() == fixture.expected[language]
 
         where:
-        language << ['en', 'de']
+        language << ['en', 'de', 'tr']
     }
 }

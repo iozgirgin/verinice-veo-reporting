@@ -8,6 +8,10 @@
 
 <style>
 <@com.defaultStyles true/>
+<#if .lang == 'tr'>
+@page { @bottom-right { content: 'Sayfa ' counter(page) ' / ' counter(pages); } }
+</#if>
+
 h1, h2, h3, h4 {
   page-break-after: avoid;
 }
@@ -103,7 +107,7 @@ domain/>
 <tr>
 <td>${control.abbreviation!}</td>
 <td>${control.name}</td>
-<td><#if applicable>${bundle.YES}<#else>${bundle.NO}</#if></td>
+<td><#if applicable>${bundle.yes}<#else>${bundle.no}</#if></td>
 <@riskCell color=statusMap[ci.implementationStatus].color>${bundle[ci.implementationStatus]}</@riskCell>
 <td>${reason}</td>
 <td>${(ri.responsible.name)!''}</td>
