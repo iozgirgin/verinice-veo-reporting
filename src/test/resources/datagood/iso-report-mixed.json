@@ -1,0 +1,87 @@
+{
+  "fixtureVersion": "1.0.0",
+  "caseId": "ISO-REPORT-MIXED-01",
+  "domain": {
+    "id": "ae247ff6-3714-51e5-a032-25d91a4676f2"
+  },
+  "riskDefinitionId": "ISORA",
+  "riskDefinition": {
+    "riskValues": [
+      {
+        "ordinalValue": 0,
+        "htmlColor": "#99CC00",
+        "translations": {
+          "en": {
+            "name": "Low"
+          }
+        }
+      },
+      {
+        "ordinalValue": 1,
+        "htmlColor": "#FFFF00",
+        "translations": {
+          "en": {
+            "name": "Medium"
+          }
+        }
+      },
+      {
+        "ordinalValue": 2,
+        "htmlColor": "#FF9900",
+        "translations": {
+          "en": {
+            "name": "High"
+          }
+        }
+      },
+      {
+        "ordinalValue": 3,
+        "htmlColor": "#FF0000",
+        "translations": {
+          "en": {
+            "name": "Very high"
+          }
+        }
+      }
+    ]
+  },
+  "risksInDomainWithData": [
+    {
+      "name": "TEST ISO mixed CIA risk",
+      "id": "231c4d21-9f0c-5764-af66-cfdd04f62f75",
+      "domains": {
+        "ae247ff6-3714-51e5-a032-25d91a4676f2": {
+          "riskDefinitions": {
+            "ISORA": {
+              "riskValues": [
+                {
+                  "category": "C",
+                  "inherentRisk": 0,
+                  "residualRisk": 0
+                },
+                {
+                  "category": "I",
+                  "inherentRisk": 1,
+                  "residualRisk": 1
+                },
+                {
+                  "category": "A",
+                  "inherentRisk": 3,
+                  "residualRisk": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "expectedCharts": {
+    "inherent": {
+      "Very high": 1
+    },
+    "residual": {
+      "Medium": 1
+    }
+  }
+}
