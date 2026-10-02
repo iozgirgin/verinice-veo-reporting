@@ -1,0 +1,22 @@
+{
+  "name": {
+    "en": "TEST DataGood Statement of Applicability"
+  },
+  "domainName": "TEST DataGood ISO",
+  "description": {
+    "en": "Synthetic DataGood validation report. Contains no licensed standard catalogue."
+  },
+  "templateFile": "datagood-iso-soa.md",
+  "templateType": "text/markdown",
+  "outputTypes": [
+    "application/pdf"
+  ],
+  "targetTypes": [
+    {
+      "modelType": "scope",
+      "subTypes": [
+        "SCP_isoScope"
+      ]
+    }
+  ]
+}

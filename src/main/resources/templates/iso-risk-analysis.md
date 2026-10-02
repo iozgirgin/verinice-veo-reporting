@@ -129,7 +129,7 @@ dl, .risk {
 </#if>
 <#if risksByTargetObjectId[scope.id]?has_content>
   <bookmark name="${bundle.scope_SCP_isoScope_singular}" href="#iso_scope"/>
-</#if>>
+</#if>
   <#list elementSubTypeGroups as group>
     <#if group.elements?filter(it->risksByTargetObjectId[it.id]?has_content)?has_content>
       <bookmark name="${group.subTypePlural}" href="#${group.elementType}_${group.subType}">

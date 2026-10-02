@@ -1,0 +1,26 @@
+{
+  "fixtureVersion": "1.2.0",
+  "treatments": [
+    "RISK_TREATMENT_ACCEPTANCE",
+    "RISK_TREATMENT_AVOIDANCE",
+    "RISK_TREATMENT_NONE",
+    "RISK_TREATMENT_REDUCTION",
+    "RISK_TREATMENT_TRANSFER"
+  ],
+  "expected": {
+    "en": [
+      "Risk acceptance",
+      "Risk avoidance",
+      "None",
+      "Risk reduction",
+      "Risk transfer"
+    ],
+    "de": [
+      "Risikoakzeptanz",
+      "Risikovermeidung",
+      "Keins",
+      "Risikoreduktion",
+      "Risikotransfer"
+    ]
+  }
+}

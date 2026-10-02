@@ -107,7 +107,9 @@ public class ReportControllerSpec extends ReportingTest {
             'bcm-emergency-manual-iso-de',
             'bcm-gfp-iso-int',
             'bcm-wap-whp-iso-int',
-            'bcm-emergency-manual-iso-int'
+            'bcm-emergency-manual-iso-int',
+            'datagood-iso-risk',
+            'datagood-iso-soa'
         ]
     }
 
