@@ -61,6 +61,7 @@ import org.veo.reporting.DataProvider;
 import org.veo.reporting.ReportConfiguration;
 import org.veo.reporting.ReportCreationParameters;
 import org.veo.reporting.ReportEngine;
+import org.veo.reporting.ReportTargetValidator;
 import org.veo.reporting.TypeSpecification;
 import org.veo.reporting.VeoClient;
 import org.veo.reporting.exception.InvalidReportParametersException;
@@ -200,11 +201,14 @@ public class ReportController {
           }
         };
 
+    Map<String, Object> reportData = dataProvider.resolve();
+    ReportTargetValidator.validate(supportedTargetTypes, target, createReport.domain(), reportData);
+
     StreamingResponseBody stream =
         out -> {
           try {
             reportEngine.generateReport(
-                id, outputType, parameters, out, dataProvider, entriesForLanguage);
+                id, outputType, parameters, out, () -> reportData, entriesForLanguage);
             LOGGER.info("Report generated");
           } catch (TemplateException e) {
             LOGGER.error("Error creating report", e);

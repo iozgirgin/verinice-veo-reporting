@@ -1,0 +1,144 @@
+{
+  "fixtureVersion": "1.0.0",
+  "graphFixture": "kvkk-report-cases.json",
+  "graphFixtureVersion": "1.0.0",
+  "reports": {
+    "workflow": [
+      {
+        "modelType": "process",
+        "subTypes": [
+          "DataSubjectRequest",
+          "ErasureRecord",
+          "TransferAssessment"
+        ]
+      },
+      {
+        "modelType": "incident",
+        "subTypes": [
+          "PersonalDataBreach"
+        ]
+      }
+    ],
+    "inventory": [
+      {
+        "modelType": "process",
+        "subTypes": [
+          "ProcessingActivity"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "caseId": "REPORT-SUBTYPE-01",
+      "report": "workflow",
+      "target": "request",
+      "expectedAllowed": true
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-02",
+      "report": "workflow",
+      "target": "erasure",
+      "expectedAllowed": true
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-03",
+      "report": "workflow",
+      "target": "transfer",
+      "expectedAllowed": true
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-04",
+      "report": "workflow",
+      "target": "breach",
+      "expectedAllowed": true
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-05",
+      "report": "inventory",
+      "target": "inventory",
+      "expectedAllowed": true
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-06",
+      "report": "workflow",
+      "target": "inventory",
+      "expectedAllowed": false
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-07",
+      "report": "inventory",
+      "target": "request",
+      "expectedAllowed": false
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-08",
+      "report": "workflow",
+      "target": "breach",
+      "requestModel": "process",
+      "expectedAllowed": false
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-09",
+      "report": "workflow",
+      "target": "request",
+      "selectedDomain": "30000000-0000-4000-8000-000000000099",
+      "expectedAllowed": false
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-10",
+      "report": "workflow",
+      "target": "request",
+      "requestId": "20000000-0000-4000-8000-000000000099",
+      "expectedAllowed": false
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-11",
+      "report": "workflow",
+      "target": "request",
+      "missingTarget": true,
+      "expectedAllowed": false
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-12",
+      "report": "workflow",
+      "target": "request",
+      "missingAssociation": true,
+      "expectedAllowed": false
+    }
+  ],
+  "unrestrictedProviderContractRetained": true,
+  "demoCompared": false,
+  "identities": [
+    {
+      "caseId": "REPORT-SUBTYPE-AUTH-13",
+      "username": null,
+      "expectedStatus": 401
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-AUTH-14",
+      "username": "test-other-tenant",
+      "expectedStatus": 404
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-AUTH-15",
+      "username": "test-reader",
+      "expectedStatus": 200
+    }
+  ],
+  "identityPolicy": "Existing access-scenarios.json: test-reader has veo-user and read_write_all_units in tenant A; authorized read/export/report is permitted, editor writes remain separately restricted.",
+  "missingApiCases": [
+    {
+      "caseId": "REPORT-SUBTYPE-NOTFOUND-16",
+      "domainKey": "gdpr",
+      "target": "request",
+      "expectedStatus": 404
+    },
+    {
+      "caseId": "REPORT-SUBTYPE-NOTFOUND-17",
+      "target": "request",
+      "requestId": "20000000-0000-4000-8000-000000000099",
+      "expectedStatus": 404
+    }
+  ]
+}

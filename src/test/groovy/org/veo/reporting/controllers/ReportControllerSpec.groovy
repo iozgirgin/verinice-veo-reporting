@@ -109,7 +109,9 @@ public class ReportControllerSpec extends ReportingTest {
             'bcm-wap-whp-iso-int',
             'bcm-emergency-manual-iso-int',
             'datagood-iso-risk',
-            'datagood-iso-soa'
+            'datagood-iso-soa',
+            'datagood-kvkk-inventory',
+            'datagood-kvkk-workflow'
         ]
     }
 
@@ -434,7 +436,7 @@ Tschüß'''
     def "create a PDF report"() {
         given:
         def unitId = UUID.randomUUID()
-        def domainId = UUID.randomUUID()
+        def domainId = UUID.fromString('fd672b7d-7e22-4c71-992c-76b59c0d4ee8')
         def scopeId = UUID.randomUUID()
         when:
         def response = POST("/reports/processing-on-behalf", 'abc', 'de',[
@@ -459,6 +461,7 @@ Tschüß'''
                 type: 'scope',
                 domains: [
                     'fd672b7d-7e22-4c71-992c-76b59c0d4ee8':[
+                        subType: 'SCP_ResponsibleBody',
                         links:[
                             scope_management: [
                                 [

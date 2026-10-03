@@ -108,8 +108,10 @@ public class VeoClientImpl implements VeoClient {
             .findFirst()
             .orElseThrow(
                 () ->
-                    new IllegalArgumentException(
-                        "Target with id " + targetId + " not found in unit " + unitId));
+                    new DataFetchingException(
+                        "/units/" + unitId + "/export",
+                        404,
+                        "Target not found in selected domain"));
     result.put("target", target);
 
     return result;
