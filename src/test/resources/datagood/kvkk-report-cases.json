@@ -1,0 +1,774 @@
+{
+  "fixtureVersion": "1.0.0",
+  "workflowFixtureVersion": "1.0.0",
+  "regulationFixtureVersion": "1.3.0",
+  "reportVersion": "1.0.0",
+  "data": {
+    "domain": {
+      "id": "f38f7e94-e470-5efb-9ddc-257666af0ddc",
+      "name": "KVKK (geliştirme)"
+    },
+    "unit": {
+      "name": "Örnek Kurum (sentetik)"
+    },
+    "processes": [
+      {
+        "id": "9138d72e-2f71-5dcf-bd36-d75909f94a57",
+        "type": "process",
+        "name": "TEST KVKK İlgili Kişi İmha Başvurusu",
+        "description": "Tamamen sentetik kayıt; kurum/kişi verisi veya gerçek bildirim değildir.",
+        "_self": "/processes/9138d72e-2f71-5dcf-bd36-d75909f94a57",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "DataSubjectRequest",
+            "status": "CLOSED",
+            "customAspects": {
+              "kvkkRequest": {
+                "caseCode": "TEST-REQUEST-01",
+                "receivedAt": "2026-01-05T08:00:00Z",
+                "channel": "TEST kayıtlı başvuru kanalı",
+                "requestType": "ERASURE",
+                "identityVerification": "TEST-VERIFY-01; asıl kimlik belgesi burada tutulmaz",
+                "assessment": "TEST geçerli başvuru senaryosu; kanuni saklama yükümlülüğü ayrıca değerlendirilir",
+                "responseDueAt": "2026-02-04T08:00:00Z",
+                "respondedAt": "2026-01-12T08:00:00Z",
+                "responseReason": "TEST başvuru cevabı; kapsam ve saklama değerlendirmesi kanıt bağlantısındadır",
+                "closedAt": "2026-01-13T12:00:00Z",
+                "legalSource": "https://www.kvkk.gov.tr/Icerik/2046/Ilgili-Kisiler-Tarafindan-Yapilan-Basvurularin-Cevaplanmasi-Yukumlulugu",
+                "ruleVersion": "6698-m13 / inceleme 2026-10-03",
+                "expertAccepted": false
+              }
+            },
+            "links": {
+              "responsible": [
+                {
+                  "target": {
+                    "type": "person",
+                    "targetUri": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "activities": [
+                {
+                  "target": {
+                    "type": "process",
+                    "targetUri": "/processes/1d0d19dd-330d-5c36-8ab4-80a094c570f0"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "systems": [
+                {
+                  "target": {
+                    "type": "asset",
+                    "targetUri": "/assets/d6e55fdd-1e6c-5ea7-b662-f4d63b87d923"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "evidenceDocuments": [
+                {
+                  "target": {
+                    "type": "document",
+                    "targetUri": "/documents/f327c130-bfbf-5cd8-93c9-2992cb6a3285"
+                  },
+                  "attributes": {}
+                },
+                {
+                  "target": {
+                    "type": "document",
+                    "targetUri": "/documents/2471541c-cc51-50a9-9663-5d483e44a341"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "measures": [
+                {
+                  "target": {
+                    "type": "control",
+                    "targetUri": "/controls/6e1a0b54-36b5-5c72-9c60-1d70e62d132c"
+                  },
+                  "attributes": {}
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "c7fa131b-5b45-5127-ba82-51c8e12b0e6e",
+        "type": "process",
+        "name": "TEST KVKK İmha İşlem Kaydı",
+        "description": "Tamamen sentetik kayıt; kurum/kişi verisi veya gerçek bildirim değildir.",
+        "_self": "/processes/c7fa131b-5b45-5127-ba82-51c8e12b0e6e",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "ErasureRecord",
+            "status": "EXECUTED",
+            "customAspects": {
+              "kvkkErasure": {
+                "caseCode": "TEST-ERASURE-01",
+                "trigger": "TEST başvuru ve saklama incelemesi",
+                "scope": "TEST 40 sentetik kayıt için simülasyon; uygulamadaki nesneler silinmez",
+                "approvedAt": "2026-01-13T09:00:00Z",
+                "executedAt": "2026-01-13T10:00:00Z",
+                "method": "ANONYMIZATION",
+                "recordCount": 40,
+                "verification": "TEST doğrulama referansı; gerçek veri anonimleştirme kabulü değildir",
+                "legalSource": "https://www.kvkk.gov.tr/Icerik/2038/kisisel-verilerin-silinmesi-yok-edilmesi-veya-anonim-hale-getirilmesi",
+                "ruleVersion": "İmha yönetmeliği / inceleme 2026-10-03",
+                "expertAccepted": false
+              }
+            },
+            "links": {
+              "responsible": [
+                {
+                  "target": {
+                    "type": "person",
+                    "targetUri": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "activities": [
+                {
+                  "target": {
+                    "type": "process",
+                    "targetUri": "/processes/1d0d19dd-330d-5c36-8ab4-80a094c570f0"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "systems": [
+                {
+                  "target": {
+                    "type": "asset",
+                    "targetUri": "/assets/d6e55fdd-1e6c-5ea7-b662-f4d63b87d923"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "evidenceDocuments": [
+                {
+                  "target": {
+                    "type": "document",
+                    "targetUri": "/documents/2471541c-cc51-50a9-9663-5d483e44a341"
+                  },
+                  "attributes": {}
+                },
+                {
+                  "target": {
+                    "type": "document",
+                    "targetUri": "/documents/f327c130-bfbf-5cd8-93c9-2992cb6a3285"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "relatedRequests": [
+                {
+                  "target": {
+                    "type": "process",
+                    "targetUri": "/processes/9138d72e-2f71-5dcf-bd36-d75909f94a57"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "measures": [
+                {
+                  "target": {
+                    "type": "control",
+                    "targetUri": "/controls/6e1a0b54-36b5-5c72-9c60-1d70e62d132c"
+                  },
+                  "attributes": {}
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "f55c052f-5eed-51cb-95db-01cead4d0db0",
+        "type": "process",
+        "name": "TEST KVKK Planlanan Yurt Dışı Aktarım İncelemesi",
+        "description": "Tamamen sentetik kayıt; kurum/kişi verisi veya gerçek bildirim değildir.",
+        "_self": "/processes/f55c052f-5eed-51cb-95db-01cead4d0db0",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "TransferAssessment",
+            "status": "UNDER_REVIEW",
+            "customAspects": {
+              "kvkkTransfer": {
+                "caseCode": "TEST-TRANSFER-01",
+                "direction": "INTERNATIONAL",
+                "recipient": "TEST tedarikçi rolü",
+                "country": "TEST Almanya senaryosu",
+                "mechanism": "Madde 9 güvenceleri için inceleme açık; fiilî aktarım yapılmadı",
+                "assessment": "TEST planlanan aktarım; envanterde fiilî yurt dışı aktarımı hâlen yok",
+                "reviewedAt": "2026-01-06T08:00:00Z",
+                "nextReviewAt": "2026-02-06T08:00:00Z",
+                "executed": false,
+                "legalSource": "https://www.kvkk.gov.tr/Icerik/8170/Yurt-Disina-Kisisel-Veri-Aktariminda-Kullanilacak-Standart-Sozlesmelerde-Dikkat-Edilmesi-Gereken-Hususlara-Iliskin-Kamuoyu-Duyurusu",
+                "ruleVersion": "6698-m9 / inceleme 2026-10-03",
+                "expertAccepted": false
+              }
+            },
+            "links": {
+              "responsible": [
+                {
+                  "target": {
+                    "type": "person",
+                    "targetUri": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "activities": [
+                {
+                  "target": {
+                    "type": "process",
+                    "targetUri": "/processes/1d0d19dd-330d-5c36-8ab4-80a094c570f0"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "systems": [
+                {
+                  "target": {
+                    "type": "asset",
+                    "targetUri": "/assets/d6e55fdd-1e6c-5ea7-b662-f4d63b87d923"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "evidenceDocuments": [
+                {
+                  "target": {
+                    "type": "document",
+                    "targetUri": "/documents/9a8b597f-7c16-5d62-83dc-79c2ff417417"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "measures": [
+                {
+                  "target": {
+                    "type": "control",
+                    "targetUri": "/controls/6e1a0b54-36b5-5c72-9c60-1d70e62d132c"
+                  },
+                  "attributes": {}
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "1d0d19dd-330d-5c36-8ab4-80a094c570f0",
+        "type": "process",
+        "name": "TEST KVKK Faturalama Kaydı",
+        "description": "",
+        "_self": "/processes/1d0d19dd-330d-5c36-8ab4-80a094c570f0",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "ProcessingActivity",
+            "status": "NEW",
+            "customAspects": {
+              "kvkkInventory": {
+                "purpose": "Sentetik aboneliklerin faturalanması",
+                "dataSubjects": "Sentetik aboneler",
+                "dataCategories": "Sentetik abone kodu; fatura tutarı",
+                "recipients": "TEST muhasebe rolü",
+                "retention": "TEST senaryosu: 12 ay; imha incelemesi açık",
+                "processingCondition": "TEST senaryosu: sözleşme için gerekli işleme değerlendirmesi; uzman kabulü bekleniyor",
+                "internationalTransfer": false,
+                "transferMechanism": "Bu senaryoda yurt dışı aktarımı yok",
+                "transferEvidence": "Aktarım yapılmadığına ilişkin TEST envanter beyanı",
+                "securityMeasures": "Rol bazlı erişim; TEST yedekleme kontrolü"
+              }
+            },
+            "links": {
+              "responsible": [
+                {
+                  "target": {
+                    "type": "person",
+                    "targetUri": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "evidenceDocuments": [
+                {
+                  "target": {
+                    "type": "document",
+                    "targetUri": "/documents/2471541c-cc51-50a9-9663-5d483e44a341"
+                  },
+                  "attributes": {}
+                },
+                {
+                  "target": {
+                    "type": "document",
+                    "targetUri": "/documents/20d90f1b-a702-56ea-a2f4-338135dc9d65"
+                  },
+                  "attributes": {}
+                },
+                {
+                  "target": {
+                    "type": "document",
+                    "targetUri": "/documents/9a8b597f-7c16-5d62-83dc-79c2ff417417"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "measures": [
+                {
+                  "target": {
+                    "type": "control",
+                    "targetUri": "/controls/6e1a0b54-36b5-5c72-9c60-1d70e62d132c"
+                  },
+                  "attributes": {}
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "assets": [
+      {
+        "id": "d6e55fdd-1e6c-5ea7-b662-f4d63b87d923",
+        "type": "asset",
+        "name": "TEST Ortak Veri Sunucusu",
+        "description": "",
+        "_self": "/assets/d6e55fdd-1e6c-5ea7-b662-f4d63b87d923",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "Resource",
+            "status": "NEW",
+            "customAspects": {},
+            "links": {}
+          }
+        }
+      }
+    ],
+    "incidents": [
+      {
+        "id": "42b9d5e3-6a08-51b0-921f-7bfda933c551",
+        "type": "incident",
+        "name": "TEST KVKK Veri İhlali Bildirim Senaryosu",
+        "description": "Tamamen sentetik kayıt; kurum/kişi verisi veya gerçek bildirim değildir.",
+        "_self": "/incidents/42b9d5e3-6a08-51b0-921f-7bfda933c551",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "PersonalDataBreach",
+            "status": "CLOSED",
+            "customAspects": {
+              "kvkkBreach": {
+                "caseCode": "TEST-BREACH-01",
+                "awareness": "2026-01-10T08:00:00Z",
+                "dataCategories": "TEST abone kodları",
+                "affectedCount": 40,
+                "riskAssessment": "TEST sınırlı olay senaryosu; hukuki önem ve yükümlülük kabulü açık",
+                "containment": "TEST erişim anahtarı kapatma ve izleme simülasyonu; gerçek sistem işlemi yapılmadı",
+                "boardNotification": "2026-01-11T10:00:00Z",
+                "subjectNotification": "2026-01-11T11:00:00Z",
+                "delayReason": "TEST aşamalı bilgi senaryosu; gerçek bildirim değildir",
+                "closedAt": "2026-01-12T08:00:00Z",
+                "legalSource": "https://www.kvkk.gov.tr/Icerik/5362/Veri-Ihlali-Bildirimi",
+                "ruleVersion": "2019/10 / inceleme 2026-10-03",
+                "expertAccepted": false
+              }
+            },
+            "links": {
+              "responsible": [
+                {
+                  "target": {
+                    "type": "person",
+                    "targetUri": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "activities": [
+                {
+                  "target": {
+                    "type": "process",
+                    "targetUri": "/processes/1d0d19dd-330d-5c36-8ab4-80a094c570f0"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "systems": [
+                {
+                  "target": {
+                    "type": "asset",
+                    "targetUri": "/assets/d6e55fdd-1e6c-5ea7-b662-f4d63b87d923"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "evidenceDocuments": [
+                {
+                  "target": {
+                    "type": "document",
+                    "targetUri": "/documents/adcf3274-8238-5d17-b1dc-2c84af62ef77"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "measures": [
+                {
+                  "target": {
+                    "type": "control",
+                    "targetUri": "/controls/6e1a0b54-36b5-5c72-9c60-1d70e62d132c"
+                  },
+                  "attributes": {}
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "documents": [
+      {
+        "id": "2471541c-cc51-50a9-9663-5d483e44a341",
+        "type": "document",
+        "name": "TEST KVKK Saklama ve İmha Politikası",
+        "description": "Tamamen sentetik kayıt; kurum/kişi verisi veya gerçek bildirim değildir.",
+        "_self": "/documents/2471541c-cc51-50a9-9663-5d483e44a341",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "Evidence",
+            "status": "NEW",
+            "customAspects": {
+              "kvkkDocument": {
+                "documentCode": "TEST-DOC-POLICY",
+                "version": "1.0.0",
+                "kind": "POLICY",
+                "effectiveFrom": "2026-01-01T08:00:00Z",
+                "reviewedAt": "2026-01-02T08:00:00Z",
+                "nextReviewAt": "2026-07-02T08:00:00Z",
+                "sourceReference": "TEST dayanak: https://www.kvkk.gov.tr/Icerik/2038/kisisel-verilerin-silinmesi-yok-edilmesi-veya-anonim-hale-getirilmesi",
+                "approvalRecord": "TEST-APPROVAL-POLICY; uzman kabulü açık"
+              }
+            },
+            "links": {
+              "responsible": [
+                {
+                  "target": {
+                    "type": "person",
+                    "targetUri": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "activities": [
+                {
+                  "target": {
+                    "type": "process",
+                    "targetUri": "/processes/1d0d19dd-330d-5c36-8ab4-80a094c570f0"
+                  },
+                  "attributes": {}
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "20d90f1b-a702-56ea-a2f4-338135dc9d65",
+        "type": "document",
+        "name": "TEST KVKK Aydınlatma Metni",
+        "description": "Tamamen sentetik kayıt; kurum/kişi verisi veya gerçek bildirim değildir.",
+        "_self": "/documents/20d90f1b-a702-56ea-a2f4-338135dc9d65",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "Evidence",
+            "status": "NEW",
+            "customAspects": {
+              "kvkkDocument": {
+                "documentCode": "TEST-DOC-NOTICE",
+                "version": "1.0.0",
+                "kind": "NOTICE",
+                "effectiveFrom": "2026-01-01T08:00:00Z",
+                "reviewedAt": "2026-01-02T08:00:00Z",
+                "nextReviewAt": "2026-07-02T08:00:00Z",
+                "sourceReference": "TEST dayanak: https://www.kvkk.gov.tr/Icerik/2046/Ilgili-Kisiler-Tarafindan-Yapilan-Basvurularin-Cevaplanmasi-Yukumlulugu",
+                "approvalRecord": "TEST-APPROVAL-NOTICE; uzman kabulü açık"
+              }
+            },
+            "links": {
+              "responsible": [
+                {
+                  "target": {
+                    "type": "person",
+                    "targetUri": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "activities": [
+                {
+                  "target": {
+                    "type": "process",
+                    "targetUri": "/processes/1d0d19dd-330d-5c36-8ab4-80a094c570f0"
+                  },
+                  "attributes": {}
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "f327c130-bfbf-5cd8-93c9-2992cb6a3285",
+        "type": "document",
+        "name": "TEST KVKK Başvuru Cevap Kanıtı",
+        "description": "Tamamen sentetik kayıt; kurum/kişi verisi veya gerçek bildirim değildir.",
+        "_self": "/documents/f327c130-bfbf-5cd8-93c9-2992cb6a3285",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "Evidence",
+            "status": "NEW",
+            "customAspects": {
+              "kvkkDocument": {
+                "documentCode": "TEST-DOC-RESPONSE",
+                "version": "1.0.0",
+                "kind": "RESPONSE",
+                "effectiveFrom": "2026-01-01T08:00:00Z",
+                "reviewedAt": "2026-01-02T08:00:00Z",
+                "nextReviewAt": "2026-07-02T08:00:00Z",
+                "sourceReference": "TEST dayanak: https://www.kvkk.gov.tr/Icerik/2046/Ilgili-Kisiler-Tarafindan-Yapilan-Basvurularin-Cevaplanmasi-Yukumlulugu",
+                "approvalRecord": "TEST-APPROVAL-RESPONSE; uzman kabulü açık"
+              }
+            },
+            "links": {
+              "responsible": [
+                {
+                  "target": {
+                    "type": "person",
+                    "targetUri": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "activities": [
+                {
+                  "target": {
+                    "type": "process",
+                    "targetUri": "/processes/1d0d19dd-330d-5c36-8ab4-80a094c570f0"
+                  },
+                  "attributes": {}
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "adcf3274-8238-5d17-b1dc-2c84af62ef77",
+        "type": "document",
+        "name": "TEST KVKK İhlal İnceleme ve Bildirim Kanıtı",
+        "description": "Tamamen sentetik kayıt; kurum/kişi verisi veya gerçek bildirim değildir.",
+        "_self": "/documents/adcf3274-8238-5d17-b1dc-2c84af62ef77",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "Evidence",
+            "status": "NEW",
+            "customAspects": {
+              "kvkkDocument": {
+                "documentCode": "TEST-DOC-BREACHEVIDENCE",
+                "version": "1.0.0",
+                "kind": "BREACH_EVIDENCE",
+                "effectiveFrom": "2026-01-01T08:00:00Z",
+                "reviewedAt": "2026-01-02T08:00:00Z",
+                "nextReviewAt": "2026-07-02T08:00:00Z",
+                "sourceReference": "TEST dayanak: https://www.kvkk.gov.tr/Icerik/5362/Veri-Ihlali-Bildirimi",
+                "approvalRecord": "TEST-APPROVAL-BREACHEVIDENCE; uzman kabulü açık"
+              }
+            },
+            "links": {
+              "responsible": [
+                {
+                  "target": {
+                    "type": "person",
+                    "targetUri": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "activities": [
+                {
+                  "target": {
+                    "type": "process",
+                    "targetUri": "/processes/1d0d19dd-330d-5c36-8ab4-80a094c570f0"
+                  },
+                  "attributes": {}
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "9a8b597f-7c16-5d62-83dc-79c2ff417417",
+        "type": "document",
+        "name": "TEST KVKK Aktarım Değerlendirme Dayanağı",
+        "description": "Tamamen sentetik kayıt; kurum/kişi verisi veya gerçek bildirim değildir.",
+        "_self": "/documents/9a8b597f-7c16-5d62-83dc-79c2ff417417",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "Evidence",
+            "status": "NEW",
+            "customAspects": {
+              "kvkkDocument": {
+                "documentCode": "TEST-DOC-TRANSFEREVIDENCE",
+                "version": "1.0.0",
+                "kind": "TRANSFER_EVIDENCE",
+                "effectiveFrom": "2026-01-01T08:00:00Z",
+                "reviewedAt": "2026-01-02T08:00:00Z",
+                "nextReviewAt": "2026-07-02T08:00:00Z",
+                "sourceReference": "TEST dayanak: https://www.kvkk.gov.tr/Icerik/8170/Yurt-Disina-Kisisel-Veri-Aktariminda-Kullanilacak-Standart-Sozlesmelerde-Dikkat-Edilmesi-Gereken-Hususlara-Iliskin-Kamuoyu-Duyurusu",
+                "approvalRecord": "TEST-APPROVAL-TRANSFEREVIDENCE; uzman kabulü açık"
+              }
+            },
+            "links": {
+              "responsible": [
+                {
+                  "target": {
+                    "type": "person",
+                    "targetUri": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "activities": [
+                {
+                  "target": {
+                    "type": "process",
+                    "targetUri": "/processes/1d0d19dd-330d-5c36-8ab4-80a094c570f0"
+                  },
+                  "attributes": {}
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "controls": [
+      {
+        "id": "6e1a0b54-36b5-5c72-9c60-1d70e62d132c",
+        "type": "control",
+        "name": "TEST KVKK Erişim ve İzleme Tedbiri",
+        "description": "Tamamen sentetik kayıt; kurum/kişi verisi veya gerçek bildirim değildir.",
+        "_self": "/controls/6e1a0b54-36b5-5c72-9c60-1d70e62d132c",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "Safeguard",
+            "status": "NEW",
+            "customAspects": {
+              "kvkkSafeguard": {
+                "implementation": "IMPLEMENTED",
+                "statement": "TEST rol erişimi ve izleme senaryosu",
+                "reviewedAt": "2026-01-02T08:00:00Z",
+                "nextReviewAt": "2026-07-02T08:00:00Z"
+              }
+            },
+            "links": {
+              "responsible": [
+                {
+                  "target": {
+                    "type": "person",
+                    "targetUri": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "activities": [
+                {
+                  "target": {
+                    "type": "process",
+                    "targetUri": "/processes/1d0d19dd-330d-5c36-8ab4-80a094c570f0"
+                  },
+                  "attributes": {}
+                }
+              ],
+              "evidenceDocuments": [
+                {
+                  "target": {
+                    "type": "document",
+                    "targetUri": "/documents/2471541c-cc51-50a9-9663-5d483e44a341"
+                  },
+                  "attributes": {}
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "persons": [
+      {
+        "id": "7d0dbaec-3fad-5cf9-883f-13de49dfeca3",
+        "type": "person",
+        "name": "TEST KVKK İş Akışı Sorumlusu",
+        "description": "Tamamen sentetik kayıt; kurum/kişi verisi veya gerçek bildirim değildir.",
+        "_self": "/persons/7d0dbaec-3fad-5cf9-883f-13de49dfeca3",
+        "domains": {
+          "f38f7e94-e470-5efb-9ddc-257666af0ddc": {
+            "subType": "ResponsibleRole",
+            "status": "NEW",
+            "customAspects": {},
+            "links": {}
+          }
+        }
+      }
+    ]
+  },
+  "targetIds": {
+    "responsible": "7d0dbaec-3fad-5cf9-883f-13de49dfeca3",
+    "policy": "2471541c-cc51-50a9-9663-5d483e44a341",
+    "notice": "20d90f1b-a702-56ea-a2f4-338135dc9d65",
+    "response": "f327c130-bfbf-5cd8-93c9-2992cb6a3285",
+    "breachEvidence": "adcf3274-8238-5d17-b1dc-2c84af62ef77",
+    "transferEvidence": "9a8b597f-7c16-5d62-83dc-79c2ff417417",
+    "safeguard": "6e1a0b54-36b5-5c72-9c60-1d70e62d132c",
+    "request": "9138d72e-2f71-5dcf-bd36-d75909f94a57",
+    "erasure": "c7fa131b-5b45-5127-ba82-51c8e12b0e6e",
+    "transfer": "f55c052f-5eed-51cb-95db-01cead4d0db0",
+    "breach": "42b9d5e3-6a08-51b0-921f-7bfda933c551",
+    "inventory": "1d0d19dd-330d-5c36-8ab4-80a094c570f0",
+    "asset": "d6e55fdd-1e6c-5ea7-b662-f4d63b87d923"
+  },
+  "cases": [
+    "KVKK-REPORT-INVENTORY-01",
+    "KVKK-REPORT-REQUEST-02",
+    "KVKK-REPORT-ERASURE-03",
+    "KVKK-REPORT-TRANSFER-04",
+    "KVKK-REPORT-BREACH-05",
+    "KVKK-REPORT-MISSING-06",
+    "KVKK-REPORT-ESCAPE-07",
+    "KVKK-REPORT-ISOLATION-08",
+    "KVKK-REPORT-AUTH-09",
+    "KVKK-REPORT-PDF-10"
+  ],
+  "expected": {
+    "relatedWorkflowCount": 4,
+    "requestReceivedUtc": "2026-01-05T08:00:00Z",
+    "requestResponseDueUtc": "2026-02-04T08:00:00Z",
+    "erasureCount": "40",
+    "breachCount": "40",
+    "expertAcceptance": "Hayır",
+    "transferExecuted": "Hayır",
+    "absence": "Kayıt yok",
+    "forbidden": [
+      "TEST GDPR Faturalama Kaydı",
+      "TEST NIS2Hizmet Kesintisi"
+    ]
+  },
+  "automaticLegalDeadlines": false,
+  "legalAcceptance": false,
+  "demoCompared": false
+}

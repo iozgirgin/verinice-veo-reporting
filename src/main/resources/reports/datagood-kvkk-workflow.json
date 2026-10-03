@@ -1,0 +1,30 @@
+{
+  "name": {
+    "tr": "TEST DataGood KVKK Başvuru, İmha, Aktarım ve İhlal Kaydı"
+  },
+  "description": {
+    "tr": "Sentetik doğrulama raporu; kayıtlı olgular ve kanıt referansları. Hukuki uygunluk veya otomatik süre hesabı değildir."
+  },
+  "domainName": "KVKK (geliştirme)",
+  "templateFile": "datagood-kvkk.md",
+  "templateType": "text/markdown",
+  "outputTypes": [
+    "application/pdf"
+  ],
+  "targetTypes": [
+    {
+      "modelType": "process",
+      "subTypes": [
+        "DataSubjectRequest",
+        "ErasureRecord",
+        "TransferAssessment"
+      ]
+    },
+    {
+      "modelType": "incident",
+      "subTypes": [
+        "PersonalDataBreach"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": {
+    "tr": "TEST DataGood KVKK Envanter ve İlişkili Kayıtlar"
+  },
+  "description": {
+    "tr": "Sentetik doğrulama raporu; kayıtlı olgular ve kanıt referansları. Hukuki uygunluk veya otomatik süre hesabı değildir."
+  },
+  "domainName": "KVKK (geliştirme)",
+  "templateFile": "datagood-kvkk.md",
+  "templateType": "text/markdown",
+  "outputTypes": [
+    "application/pdf"
+  ],
+  "targetTypes": [
+    {
+      "modelType": "process",
+      "subTypes": [
+        "ProcessingActivity"
+      ]
+    }
+  ]
+}
