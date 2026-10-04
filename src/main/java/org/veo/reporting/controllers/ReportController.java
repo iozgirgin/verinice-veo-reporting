@@ -202,6 +202,8 @@ public class ReportController {
         };
 
     Map<String, Object> reportData = dataProvider.resolve();
+    ReportTargetValidator.validateDomain(
+        configuration.get().getDomainName(), createReport.domain(), reportData);
     ReportTargetValidator.validate(supportedTargetTypes, target, createReport.domain(), reportData);
 
     StreamingResponseBody stream =

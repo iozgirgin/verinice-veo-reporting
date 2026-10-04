@@ -1,0 +1,68 @@
+{
+  "fixtureVersion": "1.0.0",
+  "domainId": "30000000-0000-4000-8000-000000000002",
+  "requiredName": "KVKK (geliştirme)",
+  "cases": [
+    {
+      "caseId": "REPORT-DOMAIN-01",
+      "actualName": "KVKK (geliştirme)",
+      "expectedAllowed": true
+    },
+    {
+      "caseId": "REPORT-DOMAIN-02",
+      "actualName": "GDPR (geliştirme)",
+      "expectedAllowed": false
+    },
+    {
+      "caseId": "REPORT-DOMAIN-03",
+      "actualName": "ISO 27001 (geliştirme)",
+      "expectedAllowed": false
+    },
+    {
+      "caseId": "REPORT-DOMAIN-04",
+      "actualName": "NIS2 (geliştirme)",
+      "expectedAllowed": false
+    },
+    {
+      "caseId": "REPORT-DOMAIN-05",
+      "actualName": "KVKK (geliştirme)",
+      "actualId": "30000000-0000-4000-8000-000000000099",
+      "expectedAllowed": false
+    },
+    {
+      "caseId": "REPORT-DOMAIN-06",
+      "missingDomain": true,
+      "expectedAllowed": false
+    },
+    {
+      "caseId": "REPORT-DOMAIN-07",
+      "requiredName": null,
+      "missingDomain": true,
+      "expectedAllowed": true
+    },
+    {
+      "caseId": "REPORT-DOMAIN-08",
+      "actualName": null,
+      "expectedAllowed": false
+    }
+  ],
+  "apiWrongContexts": [
+    {
+      "caseId": "REPORT-DOMAIN-API-09",
+      "report": "datagood-kvkk-inventory",
+      "domainKey": "gdpr",
+      "recordKey": "gdpr",
+      "expectedStatus": 400
+    },
+    {
+      "caseId": "REPORT-DOMAIN-API-10",
+      "report": "datagood-kvkk-workflow",
+      "domainKey": "gdpr",
+      "recordKey": "gdpr",
+      "expectedStatus": 400
+    }
+  ],
+  "demoCompared": false,
+  "graphFixtureVersion": "1.0.0",
+  "graphFixture": "kvkk-report-cases.json"
+}

@@ -454,6 +454,7 @@ Tschüß'''
         response.status == 200
 
         1 * veoClient.fetchData(unitId, domainId, scopeId, 'Bearer: abc') >> [
+            domain: [id: domainId.toString(), name: 'DS-GVO'],
             target:[
                 name: 'My Scope',
                 id: scopeId,

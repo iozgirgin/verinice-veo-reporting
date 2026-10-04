@@ -30,6 +30,20 @@ import org.veo.reporting.exception.InvalidReportParametersException;
 public final class ReportTargetValidator {
   private ReportTargetValidator() {}
 
+  /** A named report context must match the authorized domain returned for the request. */
+  public static void validateDomain(
+      String requiredName, UUID requestedId, Map<String, Object> data) {
+    if (requiredName == null) {
+      return;
+    }
+    if (!(data.get("domain") instanceof Map<?, ?> domain)
+        || !Objects.equals(String.valueOf(domain.get("id")), requestedId.toString())
+        || !Objects.equals(domain.get("name"), requiredName)) {
+      throw new InvalidReportParametersException(
+          "Report is not available in the selected standard or regulation domain");
+    }
+  }
+
   public static void validate(
       Set<TypeSpecification> supported,
       TargetSpecification requested,
